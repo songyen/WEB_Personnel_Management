@@ -1,31 +1,94 @@
-# Personnel Management(인사 관리 관리자 사이트)
+# 인사 관리 사이트 
+인사담당자가 직원들의 근태, 급여, 업무, 성과, 인사 관리 등을 관리할 수 있는 인사 관리 사이트를 개발하였다. 백엔드 개발을 맡아 급여, 업무, 성과, 프로필의 REST API를 구현하였고 프론트 담당과 notion을 통해 API 경로를 공유하며 진행하였다. 
+<br>
+
+## 개발 기능
+
+- 인사 관리(사용자, 부서)
+    - 인적사항관리
+    - 인사발령
+    - 인사현황
+    - 조직도관리
+- 근태 관리
+    - 근태이력관리
+    - 근무일정/시간
+    - 초과 근무
+- 급여 관리
+    - 급여이력조회
+    - 성과급 관리
+- 업무 관리
+    - 업무 조회(진행사항 등)
+    - 업무 배정
+- 성과 관리
+    - 업적 평가
+    - 역량 평가
+    
+
+## Preview
+**급여관리 검색 & 수정**
+
+![급여관리(검색,수정)resize](https://user-images.githubusercontent.com/76679463/110294913-d169ee80-8033-11eb-93ca-e164c704d8af.gif)
+
+
+**업무관리 검색 & 추가**
+
+![업무관리(검색,추가)resize](https://user-images.githubusercontent.com/76679463/110295375-60770680-8034-11eb-98d8-68f1b20bf332.gif)
+
+
+**업무관리 수정**
+
+![업무관리(수정)resize](https://user-images.githubusercontent.com/76679463/110295381-610f9d00-8034-11eb-9909-c4eabbb71cb7.gif)
+
+
+**성과관리 검색 & 수정**
+
+![성과관리(검색,수정)resize](https://user-images.githubusercontent.com/76679463/110295386-6371f700-8034-11eb-8777-a7fadb63c9c8.gif)
+
+
+**프로필**
+
+<img width="960" alt="프로필" src="https://user-images.githubusercontent.com/76679463/110295395-666ce780-8034-11eb-93a3-64b3b9f79f76.PNG">
+
+
+**페이지네이션(공통)**
+
+![페이지네이션risize](https://user-images.githubusercontent.com/76679463/110295398-679e1480-8034-11eb-8d91-910093294657.gif)     
 
 <br>
 
-## Overivew
+## Backend architecture
 
-- 인사담당자가 되었다고 생각하고 업무에 필요로 할 것 같은 일부 기능들을 구현하였다
-- 기본적으로 직원들의 정보들에 대해서 관리할 수 있고 직원들의 출근 상태를 한눈에 쉽게 알아볼 수 있도록 표현하였다
-- 각 직원들에 대한 급여관리와 진행중인 또는 진행되었던 업무들에 대해서 볼 수 있고 각 업무에 대해 직원들에 점수 또는 코멘트를 달아 성과관리를 할 수 있다
-- 직원들에 대해서 인사발령을 할 수 있으며 해당 날짜가 되면 자동으로 인사 이동이 이루어지며 현재까지 이루어진 인사현황을 확인할 수 있다
+### 데이터베이스 ERD
+
+![erd](https://user-images.githubusercontent.com/50051656/103268353-a2614c00-49f6-11eb-8b8a-1364bfbe9f59.PNG)
+
+### 도메인
+
+![domain](https://user-images.githubusercontent.com/50051656/103268357-a2f9e280-49f6-11eb-8d9a-00b61415844b.PNG)  
+
+### REST API
+| Web API | URL | Description |
+| :--- | :--- | :--- |
+| 근태관리 | /attendance | - |
+| 급여관리 | /salary | - |
+| 급여관리 수정 | /salary/{empId}/edit | 
+| 업무관리 | /work?nameType=:nameType&name=:name | :nameType - 업무명, 직원명, 부서명 드롭다운 선택 , :name - 이름 |
+| 업무관리 추가 | /work/create | - |
+| 업무관리 수정 | /work/{workId}/edit | - |
+| 성과관리 | /evaluation=:nameType&name=:name | :nameType - 업무명, 직원명, 부서명 드롭다운 선택 , :name - 이름 |
+| 성과관리 수정 | /evaluation.{evalBlockId}/edit | - |
+| 인적사항관리 | /employee | - |
+| 인사현황 | /transfer | - |
+| 프로필 | /profile | 비밀번호 변경 기능 주석처리, ~~/profile/accessRecord 전체 접속기록 내역 API~~ | 
 
 <br>
 
-## Usage
-### React
-
-- #### package.json 수정 (프로젝트 내의 fronted 폴더 내에 존재)
-
+## 설치 및 실행 방법
+### 설치
 ```
-"proxy": http://<해당주소>:8080/
-ex) "proxy": http://localhost:8080/
-```
-
-- #### 종속성 라이브러리 설치 및 프론트단 서버 실행
-
-```
-1. npm install
-2. npm start
+git clone https://github.com/songyen/WEB_Personnel_Management.git
+cd frontend
+npm install
 ```
 
 ### Spring Boot
@@ -50,114 +113,32 @@ spring:
 2. cp GeoLite2-City.mmdb build/libs
 3. java -jar -Djava.net.perferIPv4Stack=true build/libs/<생성된 jar 파일>
 4. localhost:8080/init 접속  // 더미데이터 생성
+5. npm start
 ```
 
-<br>
 
-## Preview
+<img width="921" alt="캡처" src="https://user-images.githubusercontent.com/76679463/110306150-d4b7a700-8040-11eb-89ff-c426ec746f8a.PNG">  
 
-### 전체적인 뷰
+ > 아이디 : test10@okky.kr (또는 test20@okky.kr, test30@okky.kr, test40@okky.kr, test50@okky.kr)
+ 
 
-![모든뷰](https://user-images.githubusercontent.com/50051656/112812628-4f139e00-90b8-11eb-942f-e5df03ff870b.gif)
+ > 비밀번호 : 1234
 
-### 근태
+## 의존 라이브러리
 
-![근태](https://user-images.githubusercontent.com/50051656/112816236-25f50c80-90bc-11eb-8d2b-b0d31adff29a.gif)
-
-### 직원
-
-![직원](https://user-images.githubusercontent.com/50051656/112812794-79fdf200-90b8-11eb-9fc3-f8964fb0d45d.gif)
-
-
-### 인사현황
-
-![인사현황](https://user-images.githubusercontent.com/50051656/112812637-50dd6180-90b8-11eb-8fbb-24aafd53e6d4.gif)
-
-<br>
-
-## 기능 목록
-
-### 로그인
-
-|No|기능|설명|
-|---|---|:---:|
-|1|로그인|로그인 시 jwt 토큰 발급 및 jwt토큰을 이용하여 로그인 시도|
-|2|로그아웃|-|
-
-### 근태관리
-|No|기능|설명|
-|---|---|---|
-|1|조회|출근, 퇴근, 결근, 지각 등 상태별 조회, 날짜 또는 사원 이름을 통한 조회|
-|2|최신화|매일 자정에 휴가, 병가 등 근태 기록 동기화|
-|3|출퇴근|출근 또는 퇴근시 시간과 해당 직원 상태 변경|
-
-### 급여관리
-|No|기능|설명|
-|---|---|:---:|
-|1|조회|사원 이름을 통한 조회|
-|2|급여 수정|-|
-
-### 업무관리
-|No|기능|설명|
-|---|---|:---:|
-|1|조회|업무명, 직원이름, 부서명을 통한 조회|
-|2|업무 추가|-|
-|3|업무 수정|-|
-
-### 성과관리
-|No|기능|설명|
-|---|---|---|
-|1|조회|업무명, 직원이름, 부서명을 통한 조회|
-|2|성과 수정|각 업무에 대해서 성과점수와 코멘트를 매김|
-
-### 직원관리
-|No|기능|설명|
-|---|---|:---:|
-|1|조회|직원이름, 부서명을 통한 조회|
-|2|직원 추가|-|
-|3|직원 수정|-|
-
-### 인사현황관리
-
-|No|기능|설명|
-|---|---|:---:|
-|1|조회|직원이름, 직급, 부서명을 통한 조회|
-|2|인사 발령|원하는 날짜에 원하는 부서와 직급으로 인사 발령 등록|
-|3|최신화|매일 자정 인사 발령이 필요한 직원들 인사 이동|
-
-<br>
-
-## Develop Enviroment
-
-- Java jdk 11
-- Spring Boot 2.4.1
-- Gradle
-- H2 Database
-- npm 6.14.5
-<br>
-
-## Technical Stack
-
-- Spring Boot
-- JPA
-- Spring Security
+- data-jpa
+- thymeleaf
+- spring-web
+- security
+- lombok
+- devtools
+- h2 database
+- mysql
 - JWT
-<br>
+- [maxmind.geoip2](https://github.com/maxmind) // 접속 클라이언트 ip를 통해 위치 정보 얻는 오픈소스
 
-## Contributors
+## 개발 환경
 
-- ### Back-End
-  - 하주현
-    - 로그인
-    - 근태
-    - 직원
-    - 인사현황
-  - 송예은
-    - 급여
-    - 업무
-    - 성과
-    - 프로필
-
-- ### Front-End
-  - 김다윤
-  - 보은
+- Gradle Project
+- Spring Boot 2.4.1
+- Java jdk 11
