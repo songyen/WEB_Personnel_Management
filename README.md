@@ -67,7 +67,7 @@
 ![domain](https://user-images.githubusercontent.com/50051656/103268357-a2f9e280-49f6-11eb-8d9a-00b61415844b.PNG)  
 
 ### REST API
-| Web API | URL | Description |
+| Web API | UR | Description |
 | :--- | :--- | :--- |
 | 근태관리 | /attendance | - |
 | 급여관리 | /salary | - |
