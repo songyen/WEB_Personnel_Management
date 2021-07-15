@@ -4,24 +4,28 @@
 
 ## 개발 기능
 
-- 인사 관리(사용자, 부서)
+- 인사 관리
     - 인적사항관리
     - 인사발령
     - 인사현황
-    - 조직도관리
 - 근태 관리
     - 근태이력관리
-    - 근무일정/시간
-    - 초과 근무
+    - 근무상태별 조회
 - 급여 관리
-    - 급여이력조회
-    - 성과급 관리
+    - 기본급과 성과급, 급여 조회
+    - 급여 수정
 - 업무 관리
     - 업무 조회(진행사항 등)
-    - 업무 배정
+    - 업무 추가 및 수정
 - 성과 관리
-    - 업적 평가
-    - 역량 평가
+    - 업무에 배치된 직원들의 성과평가
+    - 점수와 코멘트 등록 및 수정
+- 프로필
+    - 로그인한 관리자 정보
+    - 비밀번호 변경
+- 로그인
+    
+
     
 
 ## Preview
@@ -66,20 +70,32 @@
 
 ![domain](https://user-images.githubusercontent.com/50051656/103268357-a2f9e280-49f6-11eb-8d9a-00b61415844b.PNG)  
 
-### REST API
-| Web API | URI | Description |
-| :--- | :--- | :--- |
-| 근태관리 | /attendance | - |
-| 급여관리 | /salary | - |
-| 급여관리 수정 | /salary/{empId}/edit | 
-| 업무관리 | /work?nameType=:nameType&name=:name | :nameType - 업무명, 직원명, 부서명 드롭다운 선택 , :name - 이름 |
-| 업무관리 추가 | /work/create | - |
-| 업무관리 수정 | /work/{workId}/edit | - |
-| 성과관리 | /evaluation=:nameType&name=:name | :nameType - 업무명, 직원명, 부서명 드롭다운 선택 , :name - 이름 |
-| 성과관리 수정 | /evaluation.{evalBlockId}/edit | - |
-| 인적사항관리 | /employee | - |
-| 인사현황 | /transfer | - |
-| 프로필 | /profile | 비밀번호 변경 기능 주석처리, ~~/profile/accessRecord 전체 접속기록 내역 API~~ | 
+### REST API 설계서
+| URI | Description |
+| :--- | :--- |
+| GET /attendance/status/OFF | 사원 근무상태별 조회 |
+| GET /salary | 급여목록 조회, ?name 직원명별 조회 |
+| GET /salary/{empId}/edit | 직원의 급여수정폼 |
+| PUT /salary/{empId}/edit | 직원 급여수정 |
+| GET /work?nameType=:nameType&name=:name | 업무목록 직원,부서,업무명별 조회 |
+| GET /work/create | 업무추가폼 |
+| POST /work/create | 업무추가 | 
+| GET /work/{workId}/edit | 업무수정폼 |
+| PUT /work/{workId}/edit | 업무수정 |
+| GET /evaluation=:nameType&name=:name | 성과관리 직원,부서,업무명별 조회 |
+| GET /evaluation/{evalBlockId}/edit | 성과관리 수정폼, {evalBlockId}는 한 업무에 배치된 직원들의 성과블록를 의미 |
+| PUT /evaluation/{evalBlockId}/edit | 직원의 성과수정 |
+| GET /employee | 직원 인적사항 전체 목록 조회, ?name 직원명별, ?department 부서명별 조회 |
+| POST /employee | 직원추가 |
+| PUT /employee | 직원 정보수정 | 
+| GET /department/name | 부서명 조회 |
+| GET /transfer | 인사 발령현황 조회, ?employee 직원명별, ?department 부서명별, ?position 직급별 조회 |
+| POST /transfer | 인사 발령 |
+| GET /profile | 접속한 관리자 프로필 조회 |
+| GET /profile/accessRecord | 접속지역 조회 |
+| PUT /profile | 관리자 비밀번호 변경 |
+| POST /login | 로그인 | 
+
 
 <br>
 
