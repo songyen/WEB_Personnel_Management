@@ -82,7 +82,7 @@
 | POST /work/create | 업무추가 | 
 | GET /work/{workId}/edit | 업무수정폼 |
 | PUT /work/{workId}/edit | 업무수정 |
-| GET /evaluation=:nameType&name=:name | 성과관리 직원,부서,업무명별 조회 |
+| GET /evaluation?nameType=:nameType&name=:name | 성과관리 직원,부서,업무명별 조회 |
 | GET /evaluation/{evalBlockId}/edit | 성과관리 수정폼, {evalBlockId}는 한 업무에 배치된 직원들의 성과블록를 의미 |
 | PUT /evaluation/{evalBlockId}/edit | 직원의 성과수정 |
 | GET /employee | 직원 인적사항 전체 목록 조회, ?name 직원명별, ?department 부서명별 조회 |
