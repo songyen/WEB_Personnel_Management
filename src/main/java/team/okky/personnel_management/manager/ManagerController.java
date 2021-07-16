@@ -63,10 +63,6 @@ public class ManagerController {
         }
         return list;
     }
-    /*
-    *비밀번호 변경
-     */
-    /*
     @PutMapping("/profile")
     public String updatePw(@AuthenticationPrincipal PrincipalDetails principalDetails,@RequestBody ManagerDTO.UpdatePw updatePw) {
         Manager manager = managerService.findByEmail(principalDetails.getUsername()).get(0);
@@ -84,5 +80,4 @@ public class ManagerController {
         }
         return "비밀번호가 변경되지 않았습니다. 다시 시도하세요.";
     }
-     */
 }
