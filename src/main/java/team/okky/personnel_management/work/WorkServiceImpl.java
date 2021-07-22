@@ -162,25 +162,36 @@ public class WorkServiceImpl implements WorkService{
     @Transactional
     @Override
     public void allocationNewWork(List<Employee> empList,Work newWork){
-        String[] comment = new String[]{"BEST","SOSO","BAD"};
-        int i=0;
-        int score = 0;
+//        String[] comment = new String[]{"BEST","SOSO","BAD"};
+//        int i=0;
+//        int score = 0;
+//        for(Employee e: empList){
+//            e.changeWork(newWork);
+//            if(comment[i%3].equals("BEST")){
+//                score = 90;
+//            }
+//            else if(comment[i%3].equals("SOSO")){
+//                score = 60;
+//            }
+//            else{ score = 30;}
+//            Evaluation newEval = Evaluation.builder()
+//                    .evalResultScore(score)
+//                    .evalComment(comment[i%3])
+//                    .work(newWork)
+//                    .employee(e)
+//                    .build();
+//            i++;
+        int defaultScore = 0;
+        String defaultComment = "";
         for(Employee e: empList){
             e.changeWork(newWork);
-            if(comment[i%3].equals("BEST")){
-                score = 90;
-            }
-            else if(comment[i%3].equals("SOSO")){
-                score = 60;
-            }
-            else{ score = 30;}
+
             Evaluation newEval = Evaluation.builder()
-                    .evalResultScore(score)
-                    .evalComment(comment[i%3])
+                    .evalResultScore(defaultScore)
+                    .evalComment("코멘트를 남겨주세요.")
                     .work(newWork)
                     .employee(e)
                     .build();
-            i++;
             evaluationRepository.save(newEval);
         }
     }
